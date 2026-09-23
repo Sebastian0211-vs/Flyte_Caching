@@ -38,3 +38,5 @@ body invalidates its entry.
 too, but Flyte falls back to pickle and warns me about it.
 
 Tested on flyte 2.8.1.
+
+link to [slides](https://hessoit-my.sharepoint.com/:p:/r/personal/sebastia_morsch_hes-so_ch/Documents/Presentation%208.pptx?d=w9e030e3a56c848c8918f836c6c41f899&csf=1&web=1&e=y79M3S)
