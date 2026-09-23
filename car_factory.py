@@ -2,8 +2,11 @@ from dataclasses import dataclass
 
 import time
 import flyte
+import os
 
 env = flyte.TaskEnvironment(name="car_factory", cache="auto")
+
+DESCRIBE_VERSION = os.environ.get("DESCRIBE_VERSION", "v1")
 
 @dataclass
 class Car:
@@ -11,6 +14,9 @@ class Car:
     model: str
     year: int
 
+def label(car: Car) -> str:
+    text = f"{car.year} {car.make} {car.model}"
+    return text.upper() if os.environ.get("LABEL_STYLE") == "upper" else text
 
 @env.task
 def build(model: str, make: str, year: int) -> Car:
@@ -18,9 +24,9 @@ def build(model: str, make: str, year: int) -> Car:
     return Car(make, model, year)
 
 
-@env.task
+@env.task(cache=flyte.Cache(behavior="override", version_override=DESCRIBE_VERSION))
 def describe(car: Car) -> str:
-    return f"{car.year} {car.make} {car.model}"
+    return label(car)
 
 
 @env.task(cache="disable")
