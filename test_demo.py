@@ -36,8 +36,8 @@ def test_cache(tmp_path):
 
 def test_shared_cache(tmp_path):
     run(tmp_path, *WF)
-    assert run(tmp_path, "Fleet.py", "fleet_workflow")[1] == []
-    assert run(tmp_path, "Fleet.py", "fleet_workflow", user="B")[1] == ["500", "Panda"]
+    assert run(tmp_path, "fleet.py", "fleet_workflow")[1] == []
+    assert run(tmp_path, "fleet.py", "fleet_workflow", user="B")[1] == ["500", "Panda"]
 
 
 def test_cache_version(tmp_path):
