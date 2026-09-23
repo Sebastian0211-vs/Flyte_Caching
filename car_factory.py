@@ -20,11 +20,12 @@ def label(car: Car) -> str:
 
 @env.task
 def build(model: str, make: str, year: int) -> Car:
+    print(f"building {model}")
     time.sleep(2)
     return Car(make, model, year)
 
 
-@env.task(cache=flyte.Cache(behavior="override", version_override=DESCRIBE_VERSION))
+@env.task(cache=flyte.Cache(behavior="auto", version_override=DESCRIBE_VERSION))
 def describe(car: Car) -> str:
     return label(car)
 
